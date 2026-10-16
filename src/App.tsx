@@ -4,8 +4,9 @@ import SandboxWorkflow from './components/SandboxWorkflow';
 import TokenSavings from './components/TokenSavings';
 import PuzzleView from './components/PuzzleView';
 import Architecture from './components/Architecture';
+import Implementation from './components/Implementation';
 
-type Tab = 'overview' | 'tracer' | 'puzzle' | 'sandbox' | 'tokens';
+type Tab = 'overview' | 'tracer' | 'puzzle' | 'sandbox' | 'tokens' | 'implementation';
 
 const tabs: { id: Tab; label: string; icon: string }[] = [
   { id: 'overview', label: 'Architecture', icon: '🏗️' },
@@ -13,6 +14,7 @@ const tabs: { id: Tab; label: string; icon: string }[] = [
   { id: 'puzzle', label: 'Puzzle View', icon: '🧩' },
   { id: 'sandbox', label: 'Sandbox', icon: '📦' },
   { id: 'tokens', label: 'Token Savings', icon: '💰' },
+  { id: 'implementation', label: 'Implementation', icon: '✅' },
 ];
 
 export default function App() {
@@ -160,6 +162,7 @@ export default function App() {
           {activeTab === 'puzzle' && <PuzzleView />}
           {activeTab === 'sandbox' && <SandboxWorkflow />}
           {activeTab === 'tokens' && <TokenSavings />}
+          {activeTab === 'implementation' && <Implementation />}
         </div>
       </main>
 
