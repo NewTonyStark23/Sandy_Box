@@ -5,10 +5,12 @@ import TokenSavings from './components/TokenSavings';
 import PuzzleView from './components/PuzzleView';
 import Architecture from './components/Architecture';
 import Implementation from './components/Implementation';
+import LiveBenchmarks from './components/LiveBenchmarks';
 
-type Tab = 'overview' | 'tracer' | 'puzzle' | 'sandbox' | 'tokens' | 'implementation';
+type Tab = 'benchmarks' | 'overview' | 'tracer' | 'puzzle' | 'sandbox' | 'tokens' | 'implementation';
 
 const tabs: { id: Tab; label: string; icon: string }[] = [
+  { id: 'benchmarks', label: '🔴 LIVE BENCHMARKS', icon: '📊' },
   { id: 'overview', label: 'Architecture', icon: '🏗️' },
   { id: 'tracer', label: 'Fault Tracer', icon: '🔍' },
   { id: 'puzzle', label: 'Puzzle View', icon: '🧩' },
@@ -18,7 +20,7 @@ const tabs: { id: Tab; label: string; icon: string }[] = [
 ];
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<Tab>('overview');
+  const [activeTab, setActiveTab] = useState<Tab>('benchmarks');
 
   return (
     <div className="min-h-screen bg-[#0a0a1a] text-white">
@@ -92,6 +94,39 @@ export default function App() {
 
       {/* Main content */}
       <main className="relative max-w-7xl mx-auto px-4 py-6">
+        {/* Hero banner for benchmarks */}
+        {activeTab === 'benchmarks' && (
+          <div className="mb-6 bg-gradient-to-r from-red-900/20 via-orange-900/10 to-amber-900/20 rounded-2xl border border-red-500/20 p-6">
+            <div className="flex items-start gap-4">
+              <div className="text-4xl">🔴</div>
+              <div>
+                <h2 className="text-2xl font-black text-white">
+                  LIVE EXECUTION — No Fake Numbers
+                </h2>
+                <p className="text-gray-400 mt-2 text-sm">
+                  This tab runs the actual Rubbi-Box engine in your browser right now. 
+                  Every metric you see is measured in real-time from actual code execution. 
+                  No theoretical projections. No estimates. Just facts.
+                </p>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  <div className="px-2 py-1 rounded bg-green-900/30 border border-green-500/20 text-[10px] text-green-400">
+                    ✓ Real Execution
+                  </div>
+                  <div className="px-2 py-1 rounded bg-green-900/30 border border-green-500/20 text-[10px] text-green-400">
+                    ✓ Measured Tokens
+                  </div>
+                  <div className="px-2 py-1 rounded bg-green-900/30 border border-green-500/20 text-[10px] text-green-400">
+                    ✓ Verified Tests
+                  </div>
+                  <div className="px-2 py-1 rounded bg-cyan-900/30 border border-cyan-500/20 text-[10px] text-cyan-400">
+                    ↻ Re-runnable
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Hero banner for overview */}
         {activeTab === 'overview' && (
           <div className="mb-8 bg-gradient-to-r from-amber-900/20 via-orange-900/10 to-red-900/20 rounded-2xl border border-amber-500/20 p-6 md:p-8">
@@ -157,6 +192,7 @@ export default function App() {
 
         {/* Tab content */}
         <div className="transition-all">
+          {activeTab === 'benchmarks' && <LiveBenchmarks />}
           {activeTab === 'overview' && <Architecture />}
           {activeTab === 'tracer' && <FaultTracer />}
           {activeTab === 'puzzle' && <PuzzleView />}
