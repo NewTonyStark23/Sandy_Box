@@ -6,11 +6,13 @@ import PuzzleView from './components/PuzzleView';
 import Architecture from './components/Architecture';
 import Implementation from './components/Implementation';
 import LiveBenchmarks from './components/LiveBenchmarks';
+import EnforcementDemo from './components/EnforcementDemo';
 
-type Tab = 'benchmarks' | 'overview' | 'tracer' | 'puzzle' | 'sandbox' | 'tokens' | 'implementation';
+type Tab = 'benchmarks' | 'enforcement' | 'overview' | 'tracer' | 'puzzle' | 'sandbox' | 'tokens' | 'implementation';
 
 const tabs: { id: Tab; label: string; icon: string }[] = [
   { id: 'benchmarks', label: '🔴 LIVE BENCHMARKS', icon: '📊' },
+  { id: 'enforcement', label: '🛡️ ENFORCEMENT', icon: '🛡️' },
   { id: 'overview', label: 'Architecture', icon: '🏗️' },
   { id: 'tracer', label: 'Fault Tracer', icon: '🔍' },
   { id: 'puzzle', label: 'Puzzle View', icon: '🧩' },
@@ -127,6 +129,42 @@ export default function App() {
           </div>
         )}
 
+        {/* Hero banner for enforcement */}
+        {activeTab === 'enforcement' && (
+          <div className="mb-6 bg-gradient-to-r from-purple-900/20 via-red-900/10 to-orange-900/20 rounded-2xl border border-purple-500/20 p-6">
+            <div className="flex items-start gap-4">
+              <div className="text-4xl">🛡️</div>
+              <div>
+                <h2 className="text-2xl font-black text-white">
+                  ENFORCEMENT LAYER — Protocol is BINDING
+                </h2>
+                <p className="text-gray-400 mt-2 text-sm">
+                  This is the code that makes Rubbi-Box unbreakable. You physically cannot skip steps. 
+                  Try to edit outside the sector — BLOCKED. Try to swap without vetting — BLOCKED. 
+                  Try to skip the Context Card — BLOCKED. Every violation is logged.
+                </p>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  <div className="px-2 py-1 rounded bg-red-900/30 border border-red-500/20 text-[10px] text-red-400">
+                    🚫 Edit Guardrails
+                  </div>
+                  <div className="px-2 py-1 rounded bg-red-900/30 border border-red-500/20 text-[10px] text-red-400">
+                    🚫 Vet Gate
+                  </div>
+                  <div className="px-2 py-1 rounded bg-red-900/30 border border-red-500/20 text-[10px] text-red-400">
+                    🚫 Sector Boundaries
+                  </div>
+                  <div className="px-2 py-1 rounded bg-green-900/30 border border-green-500/20 text-[10px] text-green-400">
+                    ✓ Audit Trail
+                  </div>
+                  <div className="px-2 py-1 rounded bg-green-900/30 border border-green-500/20 text-[10px] text-green-400">
+                    ✓ Compliance Score
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Hero banner for overview */}
         {activeTab === 'overview' && (
           <div className="mb-8 bg-gradient-to-r from-amber-900/20 via-orange-900/10 to-red-900/20 rounded-2xl border border-amber-500/20 p-6 md:p-8">
@@ -193,6 +231,7 @@ export default function App() {
         {/* Tab content */}
         <div className="transition-all">
           {activeTab === 'benchmarks' && <LiveBenchmarks />}
+          {activeTab === 'enforcement' && <EnforcementDemo />}
           {activeTab === 'overview' && <Architecture />}
           {activeTab === 'tracer' && <FaultTracer />}
           {activeTab === 'puzzle' && <PuzzleView />}
