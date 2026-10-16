@@ -7,12 +7,14 @@ import Architecture from './components/Architecture';
 import Implementation from './components/Implementation';
 import LiveBenchmarks from './components/LiveBenchmarks';
 import EnforcementDemo from './components/EnforcementDemo';
+import ModeSystem from './components/ModeSystem';
 
-type Tab = 'benchmarks' | 'enforcement' | 'overview' | 'tracer' | 'puzzle' | 'sandbox' | 'tokens' | 'implementation';
+type Tab = 'benchmarks' | 'enforcement' | 'modes' | 'overview' | 'tracer' | 'puzzle' | 'sandbox' | 'tokens' | 'implementation';
 
 const tabs: { id: Tab; label: string; icon: string }[] = [
   { id: 'benchmarks', label: '🔴 LIVE BENCHMARKS', icon: '📊' },
   { id: 'enforcement', label: '🛡️ ENFORCEMENT', icon: '🛡️' },
+  { id: 'modes', label: '🎭 MODE SYSTEM', icon: '🎭' },
   { id: 'overview', label: 'Architecture', icon: '🏗️' },
   { id: 'tracer', label: 'Fault Tracer', icon: '🔍' },
   { id: 'puzzle', label: 'Puzzle View', icon: '🧩' },
@@ -165,6 +167,36 @@ export default function App() {
           </div>
         )}
 
+        {/* Hero banner for modes */}
+        {activeTab === 'modes' && (
+          <div className="mb-6 bg-gradient-to-r from-blue-900/20 via-purple-900/10 to-pink-900/20 rounded-2xl border border-purple-500/20 p-6">
+            <div className="flex items-start gap-4">
+              <div className="text-4xl">🎭</div>
+              <div>
+                <h2 className="text-2xl font-black text-white">
+                  CONTEXT-AWARE PROTOCOL
+                </h2>
+                <p className="text-gray-400 mt-2 text-sm">
+                  The enforcement layer now detects the conversation context and only activates 
+                  when there's actual code to edit. For conversations and brainstorming, 
+                  the AI responds naturally and quickly without over-analyzing.
+                </p>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  <div className="px-2 py-1 rounded bg-blue-900/30 border border-blue-500/20 text-[10px] text-blue-400">
+                    💬 Conversation Mode
+                  </div>
+                  <div className="px-2 py-1 rounded bg-purple-900/30 border border-purple-500/20 text-[10px] text-purple-400">
+                    💡 Brainstorm Mode
+                  </div>
+                  <div className="px-2 py-1 rounded bg-red-900/30 border border-red-500/20 text-[10px] text-red-400">
+                    🛡️ Code Edit Mode
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Hero banner for overview */}
         {activeTab === 'overview' && (
           <div className="mb-8 bg-gradient-to-r from-amber-900/20 via-orange-900/10 to-red-900/20 rounded-2xl border border-amber-500/20 p-6 md:p-8">
@@ -232,6 +264,7 @@ export default function App() {
         <div className="transition-all">
           {activeTab === 'benchmarks' && <LiveBenchmarks />}
           {activeTab === 'enforcement' && <EnforcementDemo />}
+          {activeTab === 'modes' && <ModeSystem />}
           {activeTab === 'overview' && <Architecture />}
           {activeTab === 'tracer' && <FaultTracer />}
           {activeTab === 'puzzle' && <PuzzleView />}
